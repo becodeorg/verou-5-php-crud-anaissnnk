@@ -11,11 +11,19 @@
 
 <h1>Goodcard - track your collection of Favourite Songs Cover</h1>
 
-<ul>
-    <?php foreach ($cards as $card) : ?>
-        <li><?= $card['name'] ?></li>
-    <?php endforeach; ?>
-</ul>
+<form>
+    <section class="song-section">
+        <label for="title">Song Title:</label>
+        <input type="text" id="title" name="title">
+    </section>
+
+    <section class="artist-section">
+        <label for="artist">Artist Name:</label>
+        <input type="text" id="artist" name="artist">
+    </section>
+
+    <input type="submit">
+</form>
 
 </body>
 </html>
