@@ -10,8 +10,8 @@ error_reporting(E_ALL);
 
 // Load you classes
 require_once 'config.php';
-require_once 'classes/DatabaseManager.php';
-require_once 'classes/CardRepository.php';
+require_once 'Classes/DatabaseManager.php';
+require_once 'Classes/CardRepository.php';
 
 $databaseManager = new DatabaseManager($config['host'], $config['user'], $config['password'], $config['dbname']);
 $databaseManager->connect();
@@ -29,7 +29,7 @@ $action = $_GET['action'] ?? null;
 // This system will help you to only execute the code you want, instead of all of it (or complex if statements)
 switch ($action) {
     case 'create':
-        create();
+        create($databaseManager);
         break;
     default:
         overview();
@@ -43,7 +43,26 @@ function overview()
     require 'overview.php';
 }
 
-function create()
+function create(DatabaseManager $databaseManager)
 {
     // TODO: provide the create logic
+    if($_SERVER["REQUEST_METHOD"] === "POST") {
+        $songtitle = $_POST["title"];
+        $artistname = $_POST["artist"];
+        try {
+            $pdo = $databaseManager->connection;
+            echo 'Connected to database overview.php';
+
+            $query = "INSERT INTO collection (Title, Artist) VALUES(?, ?);";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$songtitle, $artistname]);
+
+            $pdo = null;
+            $stmt = null;
+            die();
+
+        } catch (PDOException $e) {
+            die("Query failed" . $e->getMessage());
+        }
+    }
 }
