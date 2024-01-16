@@ -1,5 +1,5 @@
 <?php
-
+require_once 'config.php';
 // This class will manage the connection to the database
 // It will be passed on the other classes who need it
 class DatabaseManager
@@ -16,11 +16,32 @@ class DatabaseManager
     public function __construct(string $host, string $user, string $password, string $dbname)
     {
         // TODO: Set any user and password information
+        $this->host = $host;
+        $this->user = $user;
+        $this->password = $password;
+        $this->dbname = $dbname;
     }
 
     public function connect(): void
     {
         // TODO: make the connection to the database
-        $this->connection = null;
-    }
+        try {
+            $dsn = "mysql:host=$this->host;dbname=$this->dbname";
+            $this->connection = new PDO($dsn, $this->user, $this->password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+            echo 'Connected to database';
+
+        } catch (PDOException $error) {
+            echo 'Connection failed' . $error->getMessage();
+        }
+   }
 }
+
+$databaseManager = new DatabaseManager(
+    $config['host'],
+    $config['user'],
+    $config['password'],
+    $config['dbname']
+);
