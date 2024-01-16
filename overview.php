@@ -11,7 +11,7 @@
 
 <h1>Goodcard - track your collection of Favourite Songs Cover</h1>
 
-<form method="POST">
+<form action="index.php" method="POST">
     <section class="song-section">
         <label for="title">Song Title:</label>
         <input type="text" id="title" name="title">

@@ -38,10 +38,3 @@ class DatabaseManager
         }
    }
 }
-
-$databaseManager = new DatabaseManager(
-    $config['host'],
-    $config['user'],
-    $config['password'],
-    $config['dbname']
-);

@@ -43,26 +43,26 @@ function overview()
     require 'overview.php';
 }
 
-function create(DatabaseManager $databaseManager)
+function create()
 {
     // TODO: provide the create logic
-    if($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $songtitle = $_POST["title"];
         $artistname = $_POST["artist"];
         try {
             $pdo = $databaseManager->connection;
-            echo 'Connected to database overview.php';
+            echo 'index.php is connected to the database';
 
-            $query = "INSERT INTO collection (Title, Artist) VALUES(?, ?);";
+            // Uncomment the following lines to insert new data
+            $query = "INSERT INTO collection (Title, Artist) VALUES (?, ?)";
             $stmt = $pdo->prepare($query);
             $stmt->execute([$songtitle, $artistname]);
 
-            $pdo = null;
-            $stmt = null;
-            die();
-
+            // $pdo = null;
+            // $stmt = null;
+            // die();
         } catch (PDOException $e) {
-            die("Query failed" . $e->getMessage());
+            echo("Query failed" . $e->getMessage());
         }
     }
 }
