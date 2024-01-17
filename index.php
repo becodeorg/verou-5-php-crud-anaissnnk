@@ -49,7 +49,7 @@ function overview($databaseManager)
 {
     // Load your view
     $cardRepository = new CardRepository($databaseManager);
-    $songs = $cardRepository->get();
+    $quotes = $cardRepository->get();
 
     // Tip: you can load this dynamically and based on a variable, if you want to load another view
     require 'overview.php';

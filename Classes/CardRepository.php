@@ -15,12 +15,11 @@ class CardRepository
 
     public function create(): void
     {
-        $songtitle = $_POST["title"];
-        // $artistname = $_POST["artist"];
+        $quotes = $_POST["quote"];
         try {
-            $query = "INSERT INTO collection (Title) VALUES (?)";
+            $query = "INSERT INTO collection (Quote) VALUES (?)";
             $stmt = $this->databaseManager->connection->prepare($query);
-            $stmt->execute([$songtitle]);
+            $stmt->execute([$quotes]);
         } catch (PDOException $e) {
             echo("Query failed" . $e->getMessage());
         }

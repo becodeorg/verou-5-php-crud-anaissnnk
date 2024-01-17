@@ -9,18 +9,18 @@
 </head>
 <body>
 
-<h1>Track your collection of Favourite Songs Cover</h1>
+<h1>Track your collection of Favourite quotes</h1>
 
 <ul>
-    <?php foreach ($songs as $song) : ?>
-        <li><?= $song['Title'] ?></li>
+    <?php foreach ($quotes as $quote) : ?>
+        <li><?= $quote['Quote'] ?></li>
     <?php endforeach; ?>
 </ul>
 
 <form action="?action=create" method="POST">
-    <section class="song-section">
-        <label for="title">Song Title:</label>
-        <input type="text" id="title" name="title">
+    <section class="quote-section">
+        <label for="quote">Quotes:</label>
+        <input type="text" id="quote" name="quote">
     </section>
 
     <!-- <section class="artist-section">
