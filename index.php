@@ -62,6 +62,5 @@ function create($databaseManager)
             $cardRepository->create();
     }
     overview($databaseManager);
-    // TODO: provide the create logic
 }
 
