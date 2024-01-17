@@ -10,12 +10,11 @@
 <body>
 
 <h1>Track your collection of Favourite quotes</h1>
-<a href="./edit.php">Edit quotes here</a>
 
 <ul>
     <?php foreach ($quotes as $quote) : ?>
         <li><?= $quote['Quote'] ?></li>
-        
+        <p><a href="?action=edit&id=<?= $quote["id"] ?>">Edit</a>
     <?php endforeach; ?>
 </ul>
 

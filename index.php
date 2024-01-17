@@ -65,12 +65,14 @@ function create($databaseManager)
 }
 
 function edit($databaseManager) {
-    if($_SERVER["REQUEST-METHOD"] === "POST") {
+    if($_SERVER["REQUEST_METHOD"] === "POST") {
         $cardRepository = new CardRepository ($databaseManager);
         $cardRepository->update();
         overview($databaseManager);
     } else {
-        echo "Could not use edit function from index.php";
+        $cardRepository = new cardRepository($databaseManager);
+        $quote = $cardRepository->find()[0];
+        require 'edit.php';
     }
 }
 

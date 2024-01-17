@@ -10,7 +10,7 @@
 <form method="POST">
     <section class="quote-section">
         <label for="quote">Quotes:</label>
-        <input type="text" id="quote" name="quote">
+        <input type="text" id="quote" name="quote" value="<?= $quote["Quote"] ?>">
     </section>
 
     <input type="submit" name="submit">

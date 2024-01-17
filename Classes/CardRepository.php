@@ -28,7 +28,21 @@ class CardRepository
     // Get one
     public function find(): array
     {
+        try {
+            $query = "SELECT * FROM collection WHERE id = :id";
+            $stmt = $this->databaseManager->connection->prepare($query);
 
+            $stmt->bindParam(":id", $_GET['id']);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+        
+            return $result;
+        
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
     }
 
     // Get all
