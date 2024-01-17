@@ -23,13 +23,21 @@ $cards = $cardRepository->get();
 
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
-$action = $_GET['action'] ?? null;
+// $action = $_GET['action'] ?? null;
+$page = $_SERVER["REQUEST_URI"];
+$BASE_PATH = "localhost/BeCode/verou-5-php-crud-anaissnnk/";
 
 // Load the relevant action
 // This system will help you to only execute the code you want, instead of all of it (or complex if statements)
-switch ($action) {
-    case 'create':
+switch ($page) {
+    case $BASE_PATH:
+        overview($databaseManager);
+        break;
+    case $BASE_PATH . 'create':
         create($databaseManager);
+        break;
+    case $BASE_PATH . 'edit':
+        echo "Editing ...";
         break;
     default:
         overview();
@@ -43,26 +51,35 @@ function overview()
     require 'overview.php';
 }
 
-function create()
+function create($databaseManager)
 {
-    // TODO: provide the create logic
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $songtitle = $_POST["title"];
-        $artistname = $_POST["artist"];
-        try {
-            $pdo = $databaseManager->connection;
-            echo 'index.php is connected to the database';
-
-            // Uncomment the following lines to insert new data
-            $query = "INSERT INTO collection (Title, Artist) VALUES (?, ?)";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$songtitle, $artistname]);
-
-            // $pdo = null;
-            // $stmt = null;
-            // die();
-        } catch (PDOException $e) {
-            echo("Query failed" . $e->getMessage());
-        }
+    if(isset($_POST['submit'])) {
+            $cardRepository = new CardRepository($databaseManager);
+            $cardRepository->create();
     }
+    require 'createView.php';
+    // TODO: provide the create logic
 }
+
+// function create()
+// {
+//     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+//         $songtitle = $_POST["title"];
+//         $artistname = $_POST["artist"];
+//         try {
+//             $pdo = $databaseManager->connection;
+//             echo 'index.php is connected to the database';
+
+//             // Uncomment the following lines to insert new data
+//             $query = "INSERT INTO collection (Title, Artist) VALUES (?, ?)";
+//             $stmt = $pdo->prepare($query);
+//             $stmt->execute([$songtitle, $artistname]);
+
+//             $pdo = null;
+//             $stmt = null;
+//             die();
+//         } catch (PDOException $e) {
+//             echo("Query failed" . $e->getMessage());
+//         }
+//     }
+// }
