@@ -22,7 +22,7 @@
         <input type="text" id="artist" name="artist">
     </section>
 
-    <input type="submit">
+    <input type="submit" name="submit">
 </form>
 
 </body>
