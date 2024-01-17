@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1>Goodcard - track your collection of Favourite Songs Cover</h1>
+<h1>Track your collection of Favourite Songs Cover</h1>
 
 <form action="index.php" method="POST">
     <section class="song-section">
