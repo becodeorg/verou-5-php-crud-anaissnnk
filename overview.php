@@ -11,16 +11,22 @@
 
 <h1>Track your collection of Favourite Songs Cover</h1>
 
-<form action="index.php" method="POST">
+<ul>
+    <?php foreach ($songs as $song) : ?>
+        <li><?= $song['Title'] ?></li>
+    <?php endforeach; ?>
+</ul>
+
+<form action="?action=create" method="POST">
     <section class="song-section">
         <label for="title">Song Title:</label>
         <input type="text" id="title" name="title">
     </section>
 
-    <section class="artist-section">
+    <!-- <section class="artist-section">
         <label for="artist">Artist Name:</label>
         <input type="text" id="artist" name="artist">
-    </section>
+    </section> -->
 
     <input type="submit" name="submit">
 </form>

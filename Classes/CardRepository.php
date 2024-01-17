@@ -15,7 +15,15 @@ class CardRepository
 
     public function create(): void
     {
-
+        $songtitle = $_POST["title"];
+        // $artistname = $_POST["artist"];
+        try {
+            $query = "INSERT INTO collection (Title) VALUES (?)";
+            $stmt = $this->databaseManager->connection->prepare($query);
+            $stmt->execute([$songtitle]);
+        } catch (PDOException $e) {
+            echo("Query failed" . $e->getMessage());
+        }
     }
 
     // Get one
@@ -27,17 +35,17 @@ class CardRepository
     // Get all
     public function get(): array
     {
-        // TODO: Create an SQL query
-        // TODO: Use your database connection (see $databaseManager) and send your query to your database.
-        // TODO: fetch your data at the end of that action.
-        // TODO: replace dummy data by real one
-        return [
-            ['name' => 'dummy one'],
-            ['name' => 'dummy two'],
-        ];
+        try {
+            $query = "SELECT * FROM collection";
+            $stmt = $this->databaseManager->connection->prepare($query);
+            $stmt->execute();
+            $fetchedData = $stmt->fetchAll();
 
-        // We get the database connection first, so we can apply our queries with it
-        // return $this->databaseManager->connection-> (runYourQueryHere)
+            return $fetchedData;
+
+        } catch (PDOException $e) {
+            echo("Query failed" . $e->getMessage());
+        }
     }
 
     public function update(): void
