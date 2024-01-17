@@ -33,9 +33,9 @@ switch ($action) {
     case 'create':
         create($databaseManager);
         break;
-    // case $BASE_PATH . 'create':
-    //     create($databaseManager);
-    //     break;
+    case 'edit':
+        edit($databaseManager);
+        break;
     // case $BASE_PATH . 'edit':
     //     echo "Editing ...";
     //     overview($databaseManager);
@@ -62,5 +62,15 @@ function create($databaseManager)
             $cardRepository->create();
     }
     overview($databaseManager);
+}
+
+function edit($databaseManager) {
+    if($_SERVER["REQUEST-METHOD"] === "POST") {
+        $cardRepository = new CardRepository ($databaseManager);
+        $cardRepository->update();
+        overview($databaseManager);
+    } else {
+        echo "Could not use edit function from index.php";
+    }
 }
 

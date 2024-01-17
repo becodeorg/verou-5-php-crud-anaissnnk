@@ -49,6 +49,17 @@ class CardRepository
 
     public function update(): void
     {
+        try {
+            $query = "UPDATE collection
+            SET quote = :quote
+            WHERE id = :id";
+
+            $stmt = $this->$databaseManager->connection->prepare($query);
+            $stmt->bindParam(":quote", $_GET["quote"]);
+            $stmt->execute();
+        } catch (PDOexception $e) {
+            echo "Could not implement update query" . $e->getMessage();
+        }
 
     }
 
