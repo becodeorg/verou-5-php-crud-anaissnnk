@@ -68,8 +68,9 @@ class CardRepository
             SET quote = :quote
             WHERE id = :id";
 
-            $stmt = $this->$databaseManager->connection->prepare($query);
-            $stmt->bindParam(":quote", $_GET["quote"]);
+            $stmt = $this->databaseManager->connection->prepare($query);
+            $stmt->bindParam(":quote", $_POST["quote"]);
+            $stmt->bindParam(":id", $_GET["id"]);
             $stmt->execute();
         } catch (PDOexception $e) {
             echo "Could not implement update query" . $e->getMessage();
