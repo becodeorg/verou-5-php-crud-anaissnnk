@@ -14,6 +14,7 @@
 <ul>
     <?php foreach ($quotes as $quote) : ?>
         <li><?= $quote['Quote'] ?></li>
+        
     <?php endforeach; ?>
 </ul>
 
@@ -22,11 +23,6 @@
         <label for="quote">Quotes:</label>
         <input type="text" id="quote" name="quote">
     </section>
-
-    <!-- <section class="artist-section">
-        <label for="artist">Artist Name:</label>
-        <input type="text" id="artist" name="artist">
-    </section> -->
 
     <input type="submit" name="submit">
 </form>
